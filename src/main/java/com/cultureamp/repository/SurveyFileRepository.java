@@ -12,17 +12,17 @@ import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
-public class SurveyResponseFileRepository implements SurveyResponseRepository {
+public class SurveyFileRepository implements SurveyRepository<SurveyResponse> {
   private final String inputFileName;
   private final Function<String, SurveyResponse> mapper;
 
-  public SurveyResponseFileRepository(String inputFileName, Function<String, SurveyResponse> mapper) {
+  public SurveyFileRepository(String inputFileName, Function<String, SurveyResponse> mapper) {
     this.inputFileName = inputFileName;
     this.mapper = mapper;
   }
 
   @Override
-  public List<SurveyResponse> responses() {
+  public List<SurveyResponse> all() {
     String fileName = fileName();
     try {
       Path path = Path.of(fileName);

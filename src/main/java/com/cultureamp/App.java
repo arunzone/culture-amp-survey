@@ -1,8 +1,9 @@
 package com.cultureamp;
 
+import com.cultureamp.entity.SurveyResponse;
 import com.cultureamp.output.ConsoleOutput;
-import com.cultureamp.repository.SurveyResponseFileRepository;
-import com.cultureamp.repository.SurveyResponseRepository;
+import com.cultureamp.repository.SurveyFileRepository;
+import com.cultureamp.repository.SurveyRepository;
 import com.cultureamp.repository.mapper.SurveyResponseCsvMapper;
 import com.cultureamp.service.report.ParticipationCount;
 import com.cultureamp.service.report.ParticipationPercentageCalculator;
@@ -19,11 +20,11 @@ public class App {
     participationReport.generate();
   }
 
-  private static SurveyResponseRepository surveyResponseRepository(String[] args) {
+  private static SurveyRepository<SurveyResponse> surveyResponseRepository(String[] args) {
     String fileName = null;
     if (args.length > 0) {
       fileName = args[0];
     }
-    return new SurveyResponseFileRepository(fileName, new SurveyResponseCsvMapper());
+    return new SurveyFileRepository(fileName, new SurveyResponseCsvMapper());
   }
 }
