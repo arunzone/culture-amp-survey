@@ -11,7 +11,10 @@
 
 ## Assumptions
 
-* input survey response file name has survey question file name with `-response` suffix
+* input file name
+    * single program argument - input survey question file name is sufficient to derive response file name by
+      adding `-responses` suffix
+    * two program arguments - first one for question and second one for response
 * if the rating type is `singleselect` currently average operation is ignored as I'm not sure what is the criteria to
   calculate average on string
 

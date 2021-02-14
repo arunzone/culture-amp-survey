@@ -22,15 +22,6 @@ class SurveyResponseFileRepositoryTest {
   }
 
   @Test
-  void shouldReturnResponsesForDefaultFile() {
-    SurveyFileRepository surveyResponseFileRepository = new SurveyFileRepository(null, new SurveyResponseCsvMapper());
-
-    List<SurveyResponse> responses = surveyResponseFileRepository.all();
-
-    assertThat(responses.size(), is(6));
-  }
-
-  @Test
   void shouldThrowExceptionForInvalidFile() {
     SurveyFileRepository surveyResponseFileRepository = new SurveyFileRepository("unavailable", new SurveyResponseCsvMapper());
 

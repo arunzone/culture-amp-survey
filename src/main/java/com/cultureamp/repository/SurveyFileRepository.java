@@ -23,24 +23,16 @@ public class SurveyFileRepository implements SurveyRepository<SurveyResponse> {
 
   @Override
   public List<SurveyResponse> all() {
-    String fileName = fileName();
     try {
-      Path path = Path.of(fileName);
+      Path path = Path.of(inputFileName);
       return Files.readAllLines(path).
           stream().
           filter(line -> line.trim().length() > 2).
           map(mapper).
           collect(Collectors.toList());
     } catch (IOException e) {
-      throw new InvalidInputFileException(format("Invalid input file: %s", fileName));
+      throw new InvalidInputFileException(format("Invalid input file: %s", inputFileName));
     }
-  }
-
-  private String fileName() {
-    if (inputFileName != null) {
-      return inputFileName;
-    }
-    return "src/test/resources/survey-1-responses.csv";
   }
 
 }
