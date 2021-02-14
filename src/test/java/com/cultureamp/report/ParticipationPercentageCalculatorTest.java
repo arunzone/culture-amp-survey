@@ -1,4 +1,4 @@
-package com.cultureamp.service.report;
+package com.cultureamp.report;
 
 import org.junit.jupiter.api.Test;
 

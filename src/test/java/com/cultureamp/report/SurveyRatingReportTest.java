@@ -1,4 +1,4 @@
-package com.cultureamp.service.report;
+package com.cultureamp.report;
 
 import com.cultureamp.entity.SurveyQuestion;
 import com.cultureamp.entity.SurveyResponse;
@@ -36,7 +36,7 @@ class SurveyRatingReportTest {
 
     surveyRatingReport.generate();
 
-    verify(output).print(new RatingAverage("I like the kind of work I do.", 4.0));
+    verify(output).print(List.of(new RatingAverage("I like the kind of work I do.", 4.0)));
 
   }
 
