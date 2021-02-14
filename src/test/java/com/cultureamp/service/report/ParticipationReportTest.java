@@ -36,7 +36,7 @@ class ParticipationReportTest {
     when(participationCount.participationCountFrom(responses)).thenReturn(1L);
     when(percentageCalculator.participationPercentageFor(1L, 5)).thenReturn(percentage);
 
-    report.generateFrom();
+    report.generate();
 
     verify(output).print(new Participation(percentage, 1L));
   }

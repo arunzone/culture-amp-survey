@@ -22,10 +22,12 @@ public class ParticipationReport {
   }
 
 
-  public void generateFrom() {
+  public void generate() {
     List<SurveyResponse> responses = surveyResponseRepository.responses();
+
     long totalParticipationCount = participationCount.participationCountFrom(responses);
     BigDecimal percentage = percentageCalculator.participationPercentageFor(totalParticipationCount, responses.size());
+
     output.print(new Participation(percentage, totalParticipationCount));
   }
 }
