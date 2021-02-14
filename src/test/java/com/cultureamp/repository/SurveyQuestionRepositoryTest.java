@@ -5,6 +5,7 @@ import com.cultureamp.repository.exception.InvalidInputFileException;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,7 +16,7 @@ class SurveyQuestionRepositoryTest {
 
   @Test
   void shouldReturnDefaultQuestions() {
-    SurveyQuestionRepository surveyQuestionRepository = new SurveyQuestionRepository("src/test/resources/survey-1-responses.csv");
+    SurveyQuestionRepository surveyQuestionRepository = new SurveyQuestionRepository("src/test/resources/survey-1.csv");
 
     List<SurveyQuestion> questions = surveyQuestionRepository.all();
 
@@ -23,13 +24,29 @@ class SurveyQuestionRepositoryTest {
   }
 
   @Test
-  void shouldReturnAllAttributesForAQuestion() {
-    SurveyQuestionRepository surveyQuestionRepository = new SurveyQuestionRepository("src/test/resources/survey-1-responses.csv");
+  void shouldReturnAllAttributesForAQuestion() throws NoSuchFieldException, IllegalAccessException {
+    SurveyQuestionRepository surveyQuestionRepository = new SurveyQuestionRepository("src/test/resources/survey-1.csv");
 
     List<SurveyQuestion> questions = surveyQuestionRepository.all();
 
-    SurveyQuestion question = new SurveyQuestion("ratingquestion", "The Work", "I like the kind of work I do.");
+    SurveyQuestion question = expectedQuestion();
+
     assertThat(questions.get(0), is(Matchers.samePropertyValuesAs(question)));
+  }
+
+  private SurveyQuestion expectedQuestion() throws NoSuchFieldException, IllegalAccessException {
+    SurveyQuestion question = new SurveyQuestion();
+    Class<? extends SurveyQuestion> aClass = question.getClass();
+    setField(question, aClass, "ratingquestion", "type");
+    setField(question, aClass, "The Work", "theme");
+    setField(question, aClass, "I like the kind of work I do.", "text");
+    return question;
+  }
+
+  private void setField(SurveyQuestion question, Class<? extends SurveyQuestion> aClass, String value, String fieldName) throws NoSuchFieldException, IllegalAccessException {
+    Field type = aClass.getDeclaredField(fieldName);
+    type.setAccessible(true);
+    type.set(question, value);
   }
 
   @Test

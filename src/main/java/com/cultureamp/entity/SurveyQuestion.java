@@ -4,20 +4,19 @@ import com.opencsv.bean.CsvBindByName;
 
 @SuppressWarnings("unused")
 public class SurveyQuestion {
-  public SurveyQuestion() {
-
-  }
-
-  public SurveyQuestion(String type, String theme, String text) {
-    this.type = type;
-    this.theme = theme;
-    this.text = text;
-  }
-
-  @CsvBindByName
+  @CsvBindByName(column = "type")
   private String type;
-  @CsvBindByName
+  @CsvBindByName(column = "theme")
   private String theme;
-  @CsvBindByName
+  @CsvBindByName(column = "text")
   private String text;
+
+  public String getType() {
+    return type;
+  }
+
+  public String getText() {
+    return text;
+  }
+
 }
