@@ -2,7 +2,7 @@
 
 ## Design thoughts
 
-* Reading survey from input source and display a report in console as output
+* Reading a survey from input source and display a report in console as output
 * Application is composed of multiple layers
     * input - file
     * report - formatted output

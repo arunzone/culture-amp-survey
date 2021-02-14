@@ -13,9 +13,10 @@ import static java.util.stream.IntStream.range;
 
 public class SurveyResponseCsvMapper implements Function<String, SurveyResponse> {
   private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
+  private static final int ANSWER_START_INDEX = 3;
 
   private List<?> ratingsFrom(String[] columns) {
-    return range(3, columns.length).
+    return range(ANSWER_START_INDEX, columns.length).
         mapToObj(ratingFrom(columns)).
         collect(toList());
   }

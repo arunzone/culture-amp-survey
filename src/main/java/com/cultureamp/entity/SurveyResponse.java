@@ -7,9 +7,12 @@ import java.util.List;
 
 @AllArgsConstructor
 public class SurveyResponse {
-  private Long id;
-  private String email;
-  private OffsetDateTime date;
-  private List<?> ratings;
+  private final Long id;
+  private final String email;
+  private final OffsetDateTime date;
+  private final List<?> ratings;
 
+  public OffsetDateTime getDate() {
+    return date;
+  }
 }
