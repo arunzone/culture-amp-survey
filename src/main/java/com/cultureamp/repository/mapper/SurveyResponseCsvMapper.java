@@ -25,7 +25,7 @@ public class SurveyResponseCsvMapper implements Function<String, SurveyResponse>
     return index ->
     {
       String rating = columns[index];
-      return validNumber(rating) ? Short.valueOf(rating) : rating;
+      return validNumber(rating) ? Integer.valueOf(rating) : rating;
     };
   }
 

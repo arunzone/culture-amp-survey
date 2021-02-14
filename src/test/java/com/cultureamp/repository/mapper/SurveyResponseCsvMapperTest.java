@@ -15,7 +15,7 @@ class SurveyResponseCsvMapperTest {
   @Test
   void shouldReturnSurveyResponseWhenAllTheValuesPresent() {
     SurveyResponseCsvMapper mapper = new SurveyResponseCsvMapper();
-    List<Short> ratings = List.of((short) 5, (short) 5, (short) 5, (short) 4, (short) 4);
+    List<Integer> ratings = List.of(5, 5, 5, 4, 4);
     OffsetDateTime dateTime = OffsetDateTime.parse("2014-07-28T20:35:41+00:00");
     SurveyResponse expectedSurveyResponse = new SurveyResponse(
         1L,
@@ -31,7 +31,7 @@ class SurveyResponseCsvMapperTest {
   @Test
   void shouldHandleSpacesAndReturnSurveyResponseWhenAllTheValuesPresent() {
     SurveyResponseCsvMapper mapper = new SurveyResponseCsvMapper();
-    List<Short> ratings = List.of((short) 5, (short) 5, (short) 5, (short) 4, (short) 4);
+    List<Integer> ratings = List.of(5, 5, 5, 4, 4);
     OffsetDateTime dateTime = OffsetDateTime.parse("2014-07-28T20:35:41+00:00");
     SurveyResponse expectedSurveyResponse = new SurveyResponse(
         1L,
@@ -47,7 +47,7 @@ class SurveyResponseCsvMapperTest {
   @Test
   void shouldReturnSurveyResponseWithEmptyFirstRating() {
     SurveyResponseCsvMapper mapper = new SurveyResponseCsvMapper();
-    List<?> ratings = List.of("", (short) 5, (short) 5, (short) 4, (short) 4);
+    List<?> ratings = List.of("", 5, 5, 4, 4);
     OffsetDateTime dateTime = OffsetDateTime.parse("2014-07-28T20:35:41+00:00");
     SurveyResponse expectedSurveyResponse = new SurveyResponse(
         1L,
@@ -55,7 +55,7 @@ class SurveyResponseCsvMapperTest {
         dateTime,
         ratings);
 
-    SurveyResponse surveyResponse = mapper.apply("employee1@abc.xyz,1,2014-07-28T20:35:41+00:00,5,5,5,4,4");
+    SurveyResponse surveyResponse = mapper.apply("employee1@abc.xyz,1,2014-07-28T20:35:41+00:00,,5,5,4,4");
 
     assertThat(surveyResponse, is(Matchers.samePropertyValuesAs(expectedSurveyResponse)));
   }
@@ -63,7 +63,7 @@ class SurveyResponseCsvMapperTest {
   @Test
   void shouldReturnSurveyResponseWithoutId() {
     SurveyResponseCsvMapper mapper = new SurveyResponseCsvMapper();
-    List<Short> ratings = List.of((short) 5, (short) 5, (short) 5, (short) 4, (short) 4);
+    List<Integer> ratings = List.of(5, 5, 5, 4, 4);
     OffsetDateTime dateTime = OffsetDateTime.parse("2014-07-28T20:35:41+00:00");
     SurveyResponse expectedSurveyResponse = new SurveyResponse(
         null,
@@ -79,7 +79,7 @@ class SurveyResponseCsvMapperTest {
   @Test
   void shouldReturnSurveyResponseWithEmptyEmail() {
     SurveyResponseCsvMapper mapper = new SurveyResponseCsvMapper();
-    List<Short> ratings = List.of((short) 5, (short) 5, (short) 5, (short) 4, (short) 4);
+    List<Integer> ratings = List.of(5, 5, 5, 4, 4);
     OffsetDateTime dateTime = OffsetDateTime.parse("2014-07-28T20:35:41+00:00");
     SurveyResponse expectedSurveyResponse = new SurveyResponse(
         1L,
@@ -95,7 +95,7 @@ class SurveyResponseCsvMapperTest {
   @Test
   void shouldReturnSurveyResponseWithoutDatetime() {
     SurveyResponseCsvMapper mapper = new SurveyResponseCsvMapper();
-    List<Short> ratings = List.of((short) 5, (short) 5, (short) 5, (short) 4, (short) 4);
+    List<Integer> ratings = List.of(5, 5, 5, 4, 4);
     SurveyResponse expectedSurveyResponse = new SurveyResponse(
         1L,
         "employee1@abc.xyz",

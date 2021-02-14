@@ -12,6 +12,8 @@
 ## Assumptions
 
 * input survey response file name has survey question file name with `-response` suffix
+* if the rating type is `singleselect` currently average operation is ignored as I'm not sure what is the criteria to
+  calculate average on string
 
 ```
 ex.
