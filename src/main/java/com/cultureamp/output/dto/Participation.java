@@ -1,7 +1,10 @@
 package com.cultureamp.output.dto;
 
+import lombok.EqualsAndHashCode;
+
 import java.math.BigDecimal;
 
+@EqualsAndHashCode
 public class Participation {
   private final BigDecimal percentage;
   private final Long totalCount;

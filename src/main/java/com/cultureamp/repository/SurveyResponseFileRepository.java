@@ -2,7 +2,6 @@ package com.cultureamp.repository;
 
 import com.cultureamp.entity.SurveyResponse;
 import com.cultureamp.repository.exception.InvalidInputFileException;
-import com.cultureamp.repository.mapper.SurveyResponseCsvMapper;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,20 +14,22 @@ import static java.lang.String.format;
 
 public class SurveyResponseFileRepository implements SurveyResponseRepository {
   private final String inputFileName;
+  private final Function<String, SurveyResponse> mapper;
 
-  public SurveyResponseFileRepository(String inputFileName) {
+  public SurveyResponseFileRepository(String inputFileName, Function<String, SurveyResponse> mapper) {
     this.inputFileName = inputFileName;
+    this.mapper = mapper;
   }
 
   @Override
-  public List<SurveyResponse> responses(Function<String, SurveyResponse> mapper) {
+  public List<SurveyResponse> responses() {
     String fileName = fileName();
     try {
       Path path = Path.of(fileName);
       return Files.readAllLines(path).
           stream().
           filter(line -> line.trim().length() > 2).
-          map(new SurveyResponseCsvMapper()).
+          map(mapper).
           collect(Collectors.toList());
     } catch (IOException e) {
       throw new InvalidInputFileException(format("Invalid input file: %s", fileName));

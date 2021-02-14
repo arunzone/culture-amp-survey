@@ -14,28 +14,28 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class SurveyResponseFileRepositoryTest {
   @Test
   void shouldReturnResponsesForSpecificFile() {
-    SurveyResponseFileRepository surveyResponseFileRepository = new SurveyResponseFileRepository("src/test/resources/response.csv");
+    SurveyResponseFileRepository surveyResponseFileRepository = new SurveyResponseFileRepository("src/test/resources/response.csv", new SurveyResponseCsvMapper());
 
-    List<SurveyResponse> responses = surveyResponseFileRepository.responses(new SurveyResponseCsvMapper());
+    List<SurveyResponse> responses = surveyResponseFileRepository.responses();
 
     assertThat(responses.size(), is(1));
   }
 
   @Test
   void shouldReturnResponsesForDefaultFile() {
-    SurveyResponseFileRepository surveyResponseFileRepository = new SurveyResponseFileRepository(null);
+    SurveyResponseFileRepository surveyResponseFileRepository = new SurveyResponseFileRepository(null, new SurveyResponseCsvMapper());
 
-    List<SurveyResponse> responses = surveyResponseFileRepository.responses(new SurveyResponseCsvMapper());
+    List<SurveyResponse> responses = surveyResponseFileRepository.responses();
 
     assertThat(responses.size(), is(6));
   }
 
   @Test
   void shouldThrowExceptionForInvalidFile() {
-    SurveyResponseFileRepository surveyResponseFileRepository = new SurveyResponseFileRepository("unavailable");
+    SurveyResponseFileRepository surveyResponseFileRepository = new SurveyResponseFileRepository("unavailable", new SurveyResponseCsvMapper());
 
     InvalidInputFileException invalidInputFileException = assertThrows(InvalidInputFileException.class, () -> {
-      surveyResponseFileRepository.responses(new SurveyResponseCsvMapper());
+      surveyResponseFileRepository.responses();
     });
 
     assertThat(invalidInputFileException.getMessage(), is("Invalid input file: unavailable"));
