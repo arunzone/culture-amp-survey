@@ -27,12 +27,16 @@ public class SurveyFileRepository implements SurveyRepository<SurveyResponse> {
       Path path = Path.of(inputFileName);
       return Files.readAllLines(path).
           stream().
-          filter(line -> line.trim().length() > 2).
+          filter(this::hasAtLeastThreeColumnsIn).
           map(mapper).
           collect(Collectors.toList());
     } catch (IOException e) {
       throw new InvalidInputFileException(format("Invalid input file: %s", inputFileName));
     }
+  }
+
+  private boolean hasAtLeastThreeColumnsIn(String line) {
+    return line.chars().filter(ch -> ch == ',').count() > 2;
   }
 
 }

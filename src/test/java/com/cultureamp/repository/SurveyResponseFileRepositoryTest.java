@@ -22,6 +22,15 @@ class SurveyResponseFileRepositoryTest {
   }
 
   @Test
+  void shouldReturnOnlyValidResponsesForSpecificFile() {
+    SurveyFileRepository surveyResponseFileRepository = new SurveyFileRepository("src/test/resources/response-with-invalid-row.csv", new SurveyResponseCsvMapper());
+
+    List<SurveyResponse> responses = surveyResponseFileRepository.all();
+
+    assertThat(responses.size(), is(1));
+  }
+
+  @Test
   void shouldThrowExceptionForInvalidFile() {
     SurveyFileRepository surveyResponseFileRepository = new SurveyFileRepository("unavailable", new SurveyResponseCsvMapper());
 

@@ -25,7 +25,7 @@ public class FileNameProcessor {
   private String responseFileNameFrom(String[] args) {
     String fileName = getFileName(args);
     if (fileName.indexOf(".") > 0) {
-      return fileName != null ? fileName.replace(".", "-responses.") : null;
+      return fileName.replace(".", "-responses.");
     } else {
       return fileName + "-responses";
     }
