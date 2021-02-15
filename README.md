@@ -62,6 +62,22 @@ _Note:_ Coverage report for entity and dto are excluded
 
 ### Run Application
 
+#### With arguments
+
+Short and handy approach
+> bin/app /coding-test-application/example-data/survey-2.csv
+
+if maven and java15 are available in machine
+> mvn compile exec:java -Dexec.mainClass="com.cultureamp.App" -Dexec.args="/coding-test-application/example-data/survey-2.csv"
+
+otherwise (using docker)
+<blockquote>
+docker run -v "$PWD:/home" -w /home -it maven:3.6.3-adoptopenjdk-15 bash
+
+mvn compile exec:java -Dexec.mainClass="com.cultureamp.App" -Dexec.args="
+/coding-test-application/example-data/survey-2.csv"
+</blockquote>
+
 #### Without arguments
 
 if maven and java15 are available in machine
@@ -74,18 +90,7 @@ docker run -v "$PWD:/home" -w /home -it maven:3.6.3-adoptopenjdk-15 bash
 mvn compile exec:java -Dexec.mainClass="com.cultureamp.App"
 </blockquote>
 
-#### With arguments
-
-if maven and java15 are available in machine
-> mvn compile exec:java -Dexec.mainClass="com.cultureamp.App" -Dexec.args="/coding-test-application/example-data/survey-2.csv"
-
-otherwise (using docker)
-<blockquote>
-docker run -v "$PWD:/home" -w /home -it maven:3.6.3-adoptopenjdk-15 bash
-
-mvn compile exec:java -Dexec.mainClass="com.cultureamp.App" -Dexec.args="
-/coding-test-application/example-data/survey-2.csv"
-</blockquote>
+---
 
 ## Quality
 
